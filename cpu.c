@@ -1,3 +1,6 @@
+// File : cpu.c
+// Description : implementation of general cpu functions
+
 #include "cpu.h"
 
 void freeCPU(emulatedCPU *cpu) {
@@ -9,14 +12,20 @@ void unimplemented() {
     exit(1);
 }
 
-
-void add(emulatedCPU *cpu , uint16_t value) {
-    uint16_t result = (uint16_t) cpu->A + value;
-    cpu->flags.z = ((result & MAX_BYTE_VALUE_MASK) == 0);
-    cpu->flags.s = ((result & MSB_MASK) != 0);
-    cpu->flags.p = parity(answer & MAX_BYTE_VALUE_MASK);
-    cpu->flags.cy = (result > MAX_BYTE_VALUE_MASK);
-    cpu->flags.ac = 0; //TODO
-    cpu->A = result & MAX_BYTE_VALUE_MASK;
-
+void updateAllFlags(flags* CPUflags , uint16_t value) {
+    CPUflags->z = ((value & MAX_BYTE_VALUE_MASK) == 0);
+    CPUflags->s = ((value & MSB_MASK) != 0);
+    CPUflags->p = parity(value & MAX_BYTE_VALUE_MASK); //TODO
+    CPUflags->cy = (value > MAX_BYTE_VALUE_MASK);
+    CPUflags->ac = 0; //TODO 
 }
+
+int parity(int value) {
+    int count = 0;
+    while (value > 0) {
+        if (value & 0x01) count++;
+        value >>= 1;
+    }
+    return count % 2 == 0;
+}
+
