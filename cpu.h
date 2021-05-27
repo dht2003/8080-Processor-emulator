@@ -29,7 +29,7 @@ typedef struct EMULATED_CPU {
    uint8_t H;
    uint8_t L;
    uint16_t SP;
-   uint8_t PC;
+   uint16_t PC;
    uint8_t enable_intrupts : 1;
    flags cpuFlags;
    uint8_t *memory;
@@ -59,5 +59,10 @@ void dcr(flags *CPUflags, uint8_t *reg);
 
 void dcx(flags *CPUflags , uint8_t *upperRegister, uint8_t *lowerRegister);
 
+void jump(emulatedCPU *cpu, uint16_t addr);
+
+void call(emulatedCPU *cpu);
+
+void ret(emulatedCPU *cpu);
 
 #endif
