@@ -1,3 +1,6 @@
+// File : arithmetic.h
+// Description : Interface of arithmetic operations
+
 #ifndef ARITHMETIC_H
 #define ARITHMETIC_H
 

@@ -1,3 +1,6 @@
+// File : branch.h
+// Description : interface of branching operations 
+
 #ifndef BRANCH_H
 #define BRANCH_H
 

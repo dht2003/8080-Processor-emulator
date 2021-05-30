@@ -1,3 +1,6 @@
+// File : stack.h
+// Description: Interface of cpu stack operation
+
 #ifndef STACK_H
 #define STACK_H
 

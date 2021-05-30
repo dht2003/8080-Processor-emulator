@@ -43,6 +43,4 @@ int parity(int value);
 
 void  updateAllFlags(flags *CPUflags , uint16_t value);
 
-
-
 #endif

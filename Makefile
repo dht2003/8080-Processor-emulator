@@ -3,7 +3,7 @@ TARGET ?= a.out
 SRC_DIRS ?= ./src
 INC_DIR ?= ./include
 
-SRCS := $(shell find $(SRC_DIRS) -name *.cpp -or -name *.c -or -name *.s)
+SRCS := $(shell find $(SRC_DIRS) -name  *.c)
 OBJS := $(addsuffix .o,$(basename $(SRCS)))
 DEPS := $(OBJS:.o=.d)
 
