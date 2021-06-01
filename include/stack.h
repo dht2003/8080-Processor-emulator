@@ -10,5 +10,8 @@ void push(emulatedCPU *cpu,uint8_t highRegister, uint8_t lowerRegister );
 
 uint16_t pop(emulatedCPU *cpu);
 
+void sphl(emulatedCPU *cpu);
+
+void xthl(emulatedCPU *cpu);
 
 #endif

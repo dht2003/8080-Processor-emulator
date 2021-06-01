@@ -23,8 +23,8 @@ void cmp(emulatedCPU *cpu, uint8_t value) {
     updateAllFlags(&cpu->cpuFlags , dif);
 }
 
-void cma(emulatedCPU *cpu, uint8_t value) {
-    cpu->A = ~value;
+void cma(emulatedCPU *cpu) {
+    cpu->A = ~(cpu->A);
 }
 
 void cmc(emulatedCPU *cpu) {
@@ -37,7 +37,7 @@ void stc(emulatedCPU *cpu) {
 
 void rrc(emulatedCPU *cpu) {
     uint8_t tmp = cpu->A;
-    cpu->A = ( tmp >> 1) | ((tmp & 0x01) << 7)
+    cpu->A = ( tmp >> 1) | ((tmp & 0x01) << 7);
     cpu->cpuFlags.cy = tmp & 0x01;
 
 }

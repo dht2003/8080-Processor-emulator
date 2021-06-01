@@ -12,7 +12,7 @@ void or(emulatedCPU *cpu, uint8_t value);
 
 void xor(emulatedCPU *cpu, uint8_t value);
 
-void cmp(emulatedCPU *cpu);
+void cmp(emulatedCPU *cpu,uint8_t value);
 
 void rar(emulatedCPU *cpu);
 
