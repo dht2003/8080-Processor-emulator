@@ -31,7 +31,7 @@ typedef struct EMULATED_CPU {
    uint16_t SP;
    uint16_t PC;
    uint8_t enable_intrupts : 1;
-   flags cpuFlags;
+   flags *cpuFlags;
    uint8_t *memory;
 } emulatedCPU;
 
@@ -41,6 +41,8 @@ void unimplemented();
 
 int parity(int value);
 
-void  updateAllFlags(flags *CPUflags , uint16_t value);
+void updateAllFlags(flags *CPUflags , uint16_t value);
+
+void printState(emulatedCPU *cpu);
 
 #endif

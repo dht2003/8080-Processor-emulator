@@ -16,7 +16,7 @@ void sub(emulatedCPU *cpu ,  uint16_t value);
 
 void inr(flags *CPUflags , uint8_t *reg);
 
-void inx(flags *CPUflags , uint8_t *upperRegister , uint8_t *lowerRegister);
+void inx(uint8_t *upperRegister , uint8_t *lowerRegister);
 
 void dcr(flags *CPUflags, uint8_t *reg);
 

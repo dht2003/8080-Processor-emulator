@@ -28,3 +28,4 @@ void xthl(emulatedCPU *cpu) {
     cpu->H = sp >> 8;
     cpu->L = sp & MAX_BYTE_VALUE_MASK;
 }
+

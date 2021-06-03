@@ -5,25 +5,25 @@
 
 void add(emulatedCPU *cpu , uint16_t value) {
     uint16_t result = (uint16_t) cpu->A + value;
-    updateAllFlags(&cpu->cpuFlags,result);
+    updateAllFlags(cpu->cpuFlags,result);
     cpu->A = result & MAX_BYTE_VALUE_MASK;
 }
 
 void adc(emulatedCPU *cpu, uint16_t value) {
-    add(cpu,value + cpu->cpuFlags.cy);
+    add(cpu,value + cpu->cpuFlags->cy);
 }
 
 void dad(emulatedCPU *cpu , uint16_t value) {
     uint16_t hl = (cpu->H << 8) | cpu->L;
     uint16_t result = hl + value;
-    cpu->cpuFlags.cy = (result > MAX_BYTE_VALUE_MASK);
+    cpu->cpuFlags->cy = (result > MAX_BYTE_VALUE_MASK);
     cpu->H = result >> 8;
     cpu->L = result & MAX_BYTE_VALUE_MASK;
 }
 
 void sub(emulatedCPU *cpu, uint16_t value) {
     uint16_t result = (uint16_t) cpu->A - value;
-    updateAllFlags(&cpu->cpuFlags,result);
+    updateAllFlags(cpu->cpuFlags,result);
     cpu->A = result & MAX_BYTE_VALUE_MASK;
 }
 
@@ -35,7 +35,7 @@ void inr(flags *CPUflags , uint8_t *reg) {
     CPUflags->ac = 0;
 }
 
-void inx(flags *CPUflags , uint8_t *upperRegister , uint8_t *lowerRegister) {
+void inx(uint8_t *upperRegister , uint8_t *lowerRegister) {
     uint16_t pair = ((*upperRegister) << 8) | (*lowerRegister);
     pair++;
     *lowerRegister = (pair & MAX_BYTE_VALUE_MASK);

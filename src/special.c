@@ -22,3 +22,7 @@ void in() {
 void out() {
 
 }
+
+void nop() {
+
+}

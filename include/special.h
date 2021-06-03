@@ -6,7 +6,7 @@
 
 #include "cpu.h"
 
-void ei(emulatedCPU *cpu);
+;void ei(emulatedCPU *cpu);
 
 void di(emulatedCPU *cpu);
 
