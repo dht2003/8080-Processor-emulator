@@ -20,6 +20,6 @@ void inx(uint8_t *upperRegister , uint8_t *lowerRegister);
 
 void dcr(flags *CPUflags, uint8_t *reg);
 
-void dcx(flags *CPUflags , uint8_t *upperRegister, uint8_t *lowerRegister);
+void dcx(uint8_t *upperRegister, uint8_t *lowerRegister);
 
 #endif

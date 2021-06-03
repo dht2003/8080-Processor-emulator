@@ -50,7 +50,7 @@ void dcr(flags *CPUflags, uint8_t *reg) {
     CPUflags->ac = 0;
 }
 
-void dcx(flags *CPUflags , uint8_t *upperRegister, uint8_t *lowerRegister) {
+void dcx(uint8_t *upperRegister, uint8_t *lowerRegister) {
    uint16_t pair = ((*upperRegister) << 8) | (*lowerRegister);
     pair--;
     *lowerRegister = (pair & MAX_BYTE_VALUE_MASK);

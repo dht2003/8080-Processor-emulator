@@ -39,7 +39,6 @@ void rrc(emulatedCPU *cpu) {
     uint8_t tmp = cpu->A;
     cpu->A = ( tmp >> 1) | ((tmp & 0x01) << 7);
     cpu->cpuFlags->cy = tmp & 0x01;
-
 }
 // might need to change that 
 void rar(emulatedCPU *cpu) {

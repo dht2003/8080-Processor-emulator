@@ -45,4 +45,6 @@ void updateAllFlags(flags *CPUflags , uint16_t value);
 
 void printState(emulatedCPU *cpu);
 
+uint16_t pair(uint8_t high_reg,uint8_t low_reg);
+
 #endif

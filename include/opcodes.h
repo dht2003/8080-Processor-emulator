@@ -26,6 +26,7 @@ enum opcodes {
     inr_d = 0x14,
     dcr_d = 0x15,
     mvi_d = 0x16,
+    ral_op = 0x17,
     dad_d_e = 0x19,
     inr_h = 0x24,
     ldax_d_e = 0x1a,
@@ -213,6 +214,6 @@ enum opcodes {
     ei_op = 0xfb,
     cpi_op = 0xfe,
     rst_7 = 0xff,
-}
+};
 
 #endif

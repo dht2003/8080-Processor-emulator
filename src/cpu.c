@@ -36,3 +36,8 @@ void printState(emulatedCPU *cpu) {
            cpu->E, cpu->H, cpu->L, cpu->SP,cpu->PC);   
 }
 
+uint16_t pair(uint8_t high_reg,uint8_t low_reg) {
+    uint16_t result = (high_reg << 8) | (low_reg & MAX_BYTE_VALUE_MASK);
+    return result;
+}
+
