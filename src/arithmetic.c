@@ -17,7 +17,7 @@ void dad(emulatedCPU *cpu , uint16_t value) {
     uint16_t hl = (cpu->H << 8) | cpu->L;
     uint16_t result = hl + value;
     cpu->cpuFlags->cy = (result > MAX_BYTE_VALUE_MASK);
-    cpu->H = result >> 8;
+    cpu->H = (result >> 8) & MAX_BYTE_VALUE_MASK;
     cpu->L = result & MAX_BYTE_VALUE_MASK;
 }
 

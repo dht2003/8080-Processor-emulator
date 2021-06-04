@@ -41,3 +41,14 @@ uint16_t pair(uint8_t high_reg,uint8_t low_reg) {
     return result;
 }
 
+uint16_t get_hl(emulatedCPU *cpu) {
+    return pair(cpu->H,cpu->L);
+}
+
+uint16_t get_bc(emulatedCPU *cpu) {
+    return pair(cpu->B,cpu->C);
+}
+
+uint16_t get_de(emulatedCPU *cpu) {
+    return pair(cpu->D,cpu->E);
+}

@@ -47,4 +47,10 @@ void printState(emulatedCPU *cpu);
 
 uint16_t pair(uint8_t high_reg,uint8_t low_reg);
 
+uint16_t get_hl(emulatedCPU *cpu);
+
+uint16_t get_bc(emulatedCPU *cpu); 
+
+uint16_t get_de(emulatedCPU *cpu);
+
 #endif
