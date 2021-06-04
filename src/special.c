@@ -26,3 +26,7 @@ void out() {
 void nop() {
 
 }
+
+void daa() {
+    
+}

@@ -18,4 +18,6 @@ void out();
 
 void halt();
 
+void daa();
+
 #endif

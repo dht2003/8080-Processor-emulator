@@ -63,6 +63,53 @@ void emulate(emulatedCPU *cpu) {
             ldax(cpu,de);
             break;
         }
-        case dcx_d_e: dcx(&cpu->D,&cpu->E);
+        case dcx_d_e: dcx(&cpu->D,&cpu->E); break;
+        case inr_e: inr(cpu->cpuFlags,&cpu->E); break;
+        case dcr_e: dcr(cpu->cpuFlags,&cpu->E); break;
+        case mvi_e: mov(&cpu->E,opcode[1]); opbytes = 2; break;
+        case rar_instruction: rar(cpu); break;
+        case lxi_h_l: {
+            uint16_t hl = pair(opcode[2],opcode[1]); 
+            lxi(&cpu->H,cpu->L,hl); 
+            opbytes = 3;
+            break;
+        }
+        case shld: 
+        {
+            uint16_t addr = pair(opcode[2],opcode[1]);
+            opbytes = 3;
+            unimplemented();
+        }
+        case  inx_h_l: inx(&cpu->H,&cpu->L); break;
+        case inr_h: inr(cpu->cpuFlags,&cpu->H); break;
+        case dcr_h: dcr(cpu->cpuFlags,&cpu->H); break;
+        case mvi_h: mov(&cpu->H,opcode[1]); opbytes =2; break;
+        case daa_op: daa(); break;
+        case dad_h_l:
+        {
+            uint16_t hl = pair(cpu->H,cpu->L);
+            dad(cpu,hl);
+            break;
+        }
+        case lhld: unimplemented(); break;
+        case dcx_h_l: dcx(&cpu->H,&cpu->L); break;
+        case inr_l: inr(cpu->cpuFlags,&cpu->L); break;
+        case dcr_l: dcr(cpu->cpuFlags,&cpu->L); break;
+        case mvi_l: mov(&cpu->L,opcode[1]); opbytes =2; break;
+        case cma_op: cma(cpu); break;
+        case lxi_sp: {
+            uint16_t sp = pair(opcode[2],opcode[1]); 
+            cpu->SP = sp;
+            opbytes = 3;
+            break;
+        }
+        case sta_op: {
+            uint16_t addr = pair(opcode[2],opcode[1]); 
+            stax(cpu,addr); 
+            opbytes = 3;
+            break;
+        }
+        case inx_sp: cpu->SP++; break; // might need to change that 
+
     }
 }
