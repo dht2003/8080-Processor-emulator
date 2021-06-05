@@ -6,13 +6,13 @@
 
 #include "cpu.h"
 
-void add(emulatedCPU *cpu , uint16_t value);
+void add(emulatedCPU *cpu , uint8_t value);
 
-void adc(emulatedCPU *cpu, uint16_t value);
+void adc(emulatedCPU *cpu, uint8_t value);
 
 void dad(emulatedCPU *cpu , uint16_t value);
 
-void sub(emulatedCPU *cpu ,  uint16_t value);
+void sub(emulatedCPU *cpu ,  uint8_t value);
 
 void inr(flags *CPUflags , uint8_t *reg);
 

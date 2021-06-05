@@ -70,7 +70,7 @@ void emulate(emulatedCPU *cpu) {
         case rar_instruction: rar(cpu); break;
         case lxi_h_l: {
             uint16_t hl = pair(opcode[2],opcode[1]); 
-            lxi(&cpu->H,cpu->L,hl); 
+            lxi(&cpu->H,&cpu->L,hl); 
             opbytes = 3;
             break;
         }
@@ -212,6 +212,22 @@ void emulate(emulatedCPU *cpu) {
         case mov_a_l: mov(&cpu->A,cpu->L); break;
         case mov_a_m: mov(&cpu->A,cpu->memory[get_hl(cpu)]); break;
         case mov_a_a: mov(&cpu->A,cpu->A); break;
-
+        case add_b: add(cpu,cpu->B); break;
+        case add_c: add(cpu,cpu->C); break;
+        case add_d: add(cpu,cpu->D); break;
+        case add_e: add(cpu,cpu->E); break;
+        case add_h: add(cpu, cpu->H); break;
+        case add_l: add(cpu,cpu->L); break;
+        case add_m: add(cpu,cpu->memory[get_hl(cpu)]);break;
+        case add_a: add(cpu,cpu->A); break;
+        case adc_b: adc(cpu,cpu->B); break;
+        case adc_c: adc(cpu,cpu->C); break;
+        case adc_d: adc(cpu,cpu->D); break;
+        case adc_e: adc(cpu,cpu->E); break;
+        case adc_h: adc(cpu,cpu->H); break;
+        case adc_l: adc(cpu,cpu->L); break;
+        case adc_m: adc(cpu,cpu->memory[get_hl(cpu)]); break;
+        case adc_a: adc(cpu,cpu->A); break;
+        //case sub_b: sub()
     }
 }
