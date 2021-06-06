@@ -228,6 +228,30 @@ void emulate(emulatedCPU *cpu) {
         case adc_l: adc(cpu,cpu->L); break;
         case adc_m: adc(cpu,cpu->memory[get_hl(cpu)]); break;
         case adc_a: adc(cpu,cpu->A); break;
-        //case sub_b: sub()
+        case sub_b: sub(cpu,cpu->B); break;
+        case sub_c: sub(cpu,cpu->C); break;
+        case sub_d: sub(cpu,cpu->D); break;
+        case sub_e: sub(cpu,cpu->E); break;
+        case sub_h: sub(cpu,cpu->H); break;
+        case sub_l: sub(cpu,cpu->L); break;
+        case sub_m: sub(cpu,cpu->memory[get_hl(cpu)]); break;
+        case sub_a: sub(cpu,cpu->A); break;
+        case sbb_b: sbb(cpu,cpu->B); break;
+        case sbb_c: sbb(cpu,cpu->C); break;
+        case sbb_d: sbb(cpu,cpu->D); break;
+        case sbb_e: sbb(cpu,cpu->E); break;
+        case sbb_h: sbb(cpu,cpu->H); break;
+        case sbb_l: sbb(cpu,cpu->L); break;
+        case sbb_m: sbb(cpu,cpu->memory[get_hl(cpu)]); break;
+        case sbb_a: sbb(cpu,cpu->A); break;
+        case ana_b: and(cpu,cpu->B); break;
+        case ana_c: and(cpu,cpu->C); break;
+        case ana_d: and(cpu,cpu->D); break;
+        case ana_e: and(cpu,cpu->E); break;
+        case ana_h: and(cpu,cpu->H); break;
+        case ana_l: and(cpu,cpu->L); break;
+        case ana_m: and(cpu,cpu->memory[get_hl(cpu)]); break;
+        case ana_a: and(cpu,cpu->A); break;
+        case xra_b: xor(cpu,cpu->B); break;
     }
 }

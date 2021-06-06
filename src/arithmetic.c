@@ -27,6 +27,10 @@ void sub(emulatedCPU *cpu, uint8_t value) {
     cpu->A = result & MAX_BYTE_VALUE_MASK;
 }
 
+void sbb(emulatedCPU *cpu,uint8_t value) {
+    sub(cpu,value+cpu->cpuFlags->cy);
+}
+
 void inr(flags *CPUflags , uint8_t *reg) {
     (*reg)++;
     CPUflags->z = ((*reg) == 0);
