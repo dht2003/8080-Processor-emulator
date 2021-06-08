@@ -1,7 +1,8 @@
-#include "cpu.h"
-#include "branch.h"
-#include "stack.h"
-#include "arithmetic.h"
+#include "emulate.h"
 
 int main(int argc , char *argv[]) {
+    if (argc != 2) 
+        printf("usage : ./emulate.out [CODE_FILE]\n");
+    emulatedCPU cpu = {.PC=0};
+    
 }

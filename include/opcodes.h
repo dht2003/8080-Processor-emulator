@@ -241,8 +241,10 @@ enum opcodes {
     ori_op = 0xf6,
     rst_6 = 0xf7,
     rm_op = 0xf8,
+    sphl_op = 0xf9,
     jm_op = 0xfa,
     ei_op = 0xfb,
+    cm_op = 0xfc,
     cpi_op = 0xfe,
     rst_7 = 0xff,
 };

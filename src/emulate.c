@@ -10,13 +10,11 @@ void emulate(emulatedCPU *cpu) {
             uint16_t value = ((opcode[2] << 8) | (opcode[1] & MAX_BYTE_VALUE_MASK));
             lxi(&cpu->B,&cpu->C,value);
             opbytes = 3;
-            break;
-        }
+        } break;
         case stax_b_c: {
             uint16_t bc = pair(cpu->B,cpu->C);
             stax(cpu,bc);
-            break;
-        }
+        } break;
         case inx_b_c: inx(&cpu->B,&cpu->C); break; 
         case inr_b: inr(cpu->cpuFlags,&cpu->B); break;
         case dcr_b: dcr(cpu->cpuFlags,&cpu->B); break;
@@ -25,14 +23,12 @@ void emulate(emulatedCPU *cpu) {
         case dad_b_c: {
             uint16_t bc = pair(cpu->B,cpu->C);
             dad(cpu,bc);
-            break;
-        }
+        } break;
         case ldax_b_c: 
         {
             uint16_t bc = pair(cpu->B,cpu->C);
             ldax(cpu,bc);
-            break;
-        }
+        } break;
         case dcx_b_c: dcx(&cpu->B,&cpu->C); break;
         case inr_c: inr(cpu->cpuFlags,&cpu->C); break;
         case dcr_c: dcr(cpu->cpuFlags,&cpu->C); break;
@@ -40,14 +36,13 @@ void emulate(emulatedCPU *cpu) {
         case rrc_op: rrc(cpu); break;
         case lxi_d_e: {
             uint16_t value = pair(opcode[2],opcode[1]);
-            lxi(&cpu->D,&cpu->E,value); opbytes=3;break;
-        }
+            lxi(&cpu->D,&cpu->E,value); opbytes=3;
+        } break;
         case stax_d_e: 
         {
             uint16_t de = pair(cpu->D,cpu->E);
             stax(cpu,de);
-            break;
-        }
+        } break;
         case inx_d_e: inx(&cpu->D,&cpu->E); break;
         case inr_d: inr(cpu->cpuFlags,&cpu->D); break;
         case dcr_d: dcr(cpu->cpuFlags,&cpu->D); break;
@@ -56,13 +51,11 @@ void emulate(emulatedCPU *cpu) {
         case dad_d_e: {
             uint16_t de = pair(cpu->D,cpu->E);
             dad(cpu,de);
-            break;
-        }
+        } break;
         case ldax_d_e: {
             uint16_t de = pair(cpu->D,cpu->E);
             ldax(cpu,de);
-            break;
-        }
+        } break;
         case dcx_d_e: dcx(&cpu->D,&cpu->E); break;
         case inr_e: inr(cpu->cpuFlags,&cpu->E); break;
         case dcr_e: dcr(cpu->cpuFlags,&cpu->E); break;
@@ -72,14 +65,14 @@ void emulate(emulatedCPU *cpu) {
             uint16_t hl = pair(opcode[2],opcode[1]); 
             lxi(&cpu->H,&cpu->L,hl); 
             opbytes = 3;
-            break;
-        }
+        } break;
         case shld: 
         {
-            uint16_t addr = pair(opcode[2],opcode[1]);
+            uint16_t addr = pair(opcode[2],opcode[1]); 
+            cpu->memory[addr] = cpu->L;
+            cpu->memory[addr + 1] = cpu->H;
             opbytes = 3;
-            unimplemented();
-        }
+        } break;
         case  inx_h_l: inx(&cpu->H,&cpu->L); break;
         case inr_h: inr(cpu->cpuFlags,&cpu->H); break;
         case dcr_h: dcr(cpu->cpuFlags,&cpu->H); break;
@@ -89,9 +82,12 @@ void emulate(emulatedCPU *cpu) {
         {
             uint16_t hl = pair(cpu->H,cpu->L);
             dad(cpu,hl);
-            break;
-        }
-        case lhld: unimplemented(); break;
+        } break;
+        case lhld: {
+            uint16_t addr = pair(opcode[2],opcode[1]);
+            cpu->L = cpu->memory[addr]; 
+            cpu->H = cpu->memory[addr + 1];
+        }break;
         case dcx_h_l: dcx(&cpu->H,&cpu->L); break;
         case inr_l: inr(cpu->cpuFlags,&cpu->L); break;
         case dcr_l: dcr(cpu->cpuFlags,&cpu->L); break;
@@ -101,43 +97,37 @@ void emulate(emulatedCPU *cpu) {
             uint16_t sp = pair(opcode[2],opcode[1]); 
             cpu->SP = sp;
             opbytes = 3;
-            break;
-        }
+        } break;
         case sta_op: {
             uint16_t addr = pair(opcode[2],opcode[1]); 
             stax(cpu,addr); 
             opbytes = 3;
-            break;
-        }
+        } break;
         case inx_sp: cpu->SP++; break; // might need to change that 
         case inr_m: 
         {
             uint16_t hl = pair(cpu->H,cpu->L);
             uint8_t m = cpu->memory[hl];
             inr(cpu->cpuFlags,&m);
-            break;
-        }
+        } break;
         case dcr_m: {
             uint16_t hl = pair(cpu->H,cpu->L);
             uint8_t m = cpu->memory[hl]; 
             dcr(cpu->cpuFlags,&m);
-            break;
-        }
+        } break;
         case mvi_m: {
             uint16_t hl = pair(cpu->H,cpu->L);
             uint8_t m = cpu->memory[hl];
             mov(&m,opcode[1]);
             opbytes;
-            break;
-        }
+        } break;
         case stc_op: stc(cpu); break;
         case dad_sp:  dad(cpu,cpu->SP); break;
         case lda_op: {
             uint16_t addr = pair(opcode[2],opcode[1]);
             ldax(cpu,addr);
             opbytes = 3;
-            break;
-        }
+        } break;
         case dcx_sp: cpu->SP--; break;
         case inr_a: inr(cpu->cpuFlags,&cpu->A); break;
         case dcr_a: dcr(cpu->cpuFlags,&cpu->A); break;
@@ -153,8 +143,8 @@ void emulate(emulatedCPU *cpu) {
             uint16_t hl = pair(cpu->H,cpu->L);
             uint8_t m = cpu->memory[hl];
             mov(&cpu->B,m);
-            break;
-        }
+            
+        } break;
         case mov_b_a: mov(&cpu->B,cpu->A); break;
         case mov_c_b: mov(&cpu->C,cpu->B); break;
         case mov_c_c: mov(&cpu->C,cpu->C); break; 
@@ -283,7 +273,6 @@ void emulate(emulatedCPU *cpu) {
             cpu->C = bc & MAX_BYTE_VALUE_MASK;
         }
         break;
-
         case jnz: if(!cpu->cpuFlags->z) jump(cpu,opcode[2],opcode[1]); opbytes = 3; break;
         case jmp: jump(cpu,opcode[2],opcode[1]); opbytes = 3; break;
         case cnz: if(!cpu->cpuFlags->z) call(cpu,pair(opcode[2],opcode[1])); opbytes = 3; break;
@@ -337,12 +326,12 @@ void emulate(emulatedCPU *cpu) {
         case push_psw: unimplemented(); break; //TODO
         case ori_op: or(cpu,opcode[1]); opbytes=2; break;
         case rst_6: unimplemented(); break;
-        //case rm_op: if(cpu->cpuFlags->s);
-
-
-
-
-
-
+        case rm_op: if(cpu->cpuFlags->s) ret(cpu); break;
+        case sphl_op: sphl(cpu); break;
+        case jm_op: if(cpu->cpuFlags->s) jump(cpu,opcode[2],opcode[1]);opbytes=3;break;
+        case ei_op: ei(cpu); break;
+        case cm_op: if(cpu->cpuFlags->s) call(cpu,pair(opcode[2],opcode[1]));opbytes=3;break;
+        case cpi_op: cmp(cpu,opcode[1]);opbytes=2;break;
+        case rst_7: unimplemented(); break;
     }
 }

@@ -1,5 +1,6 @@
 CC = gcc
-TARGET ?= a.out
+BIN_DIR ?= ./bin
+TARGET ?= $(BIN_DIR)/emulate.out
 SRC_DIRS ?= ./src
 INC_DIR ?= ./include
 
