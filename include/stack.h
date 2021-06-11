@@ -5,6 +5,7 @@
 #define STACK_H
 
 #include "cpu.h"
+#include "util.h"
 
 void push(emulatedCPU *cpu,uint8_t highRegister, uint8_t lowerRegister );
 

@@ -3,6 +3,7 @@
 #define MOVE_H
 
 #include "cpu.h"
+#include "util.h"
 
 void mov(uint8_t *reg, uint8_t value);
 

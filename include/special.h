@@ -5,6 +5,7 @@
 #define SPECIAL_H
 
 #include "cpu.h"
+#include "util.h"
 
 void ei(emulatedCPU *cpu); 
 

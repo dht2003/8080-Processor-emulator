@@ -5,6 +5,7 @@
 #define BRANCH_H
 
 #include "stack.h"
+#include "util.h"
 #include "cpu.h"
 
 void jump(emulatedCPU *cpu, uint8_t upper_adr, uint8_t lower_adr); // might change that later 

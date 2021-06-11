@@ -5,6 +5,7 @@
 #define ARITHMETIC_H
 
 #include "cpu.h"
+#include "util.h"
 
 void add(emulatedCPU *cpu , uint8_t value);
 

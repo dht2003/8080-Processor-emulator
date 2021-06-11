@@ -5,6 +5,7 @@
 #define LOGIC_H
 
 #include "cpu.h"
+#include "util.h"
 
 void and(emulatedCPU *cpu , uint8_t value);
 

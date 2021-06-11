@@ -10,6 +10,7 @@
 
 #define MAX_BYTE_VALUE_MASK 0xff
 #define MSB_MASK 0x80
+#define MEMORY_SIZE 16000
 
 
 typedef struct Flags {
@@ -35,22 +36,14 @@ typedef struct EMULATED_CPU {
    uint8_t *memory;
 } emulatedCPU;
 
+emulatedCPU *initCPU();
+
 void freeCPU(emulatedCPU *cpu) ;
 
 void unimplemented();
 
-int parity(int value);
-
-void updateAllFlags(flags *CPUflags , uint16_t value);
-
 void printState(emulatedCPU *cpu);
 
-uint16_t pair(uint8_t high_reg,uint8_t low_reg);
-
-uint16_t get_hl(emulatedCPU *cpu);
-
-uint16_t get_bc(emulatedCPU *cpu); 
-
-uint16_t get_de(emulatedCPU *cpu);
+void readFile(emulatedCPU* cpu,char *filePath,uint32_t offset);
 
 #endif
