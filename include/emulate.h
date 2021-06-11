@@ -1,9 +1,9 @@
 #ifndef EMULATE_H
 #define EMULATE_H
 
+#include "cpu.h"
 #include "arithmetic.h"
 #include "branch.h"
-#include "cpu.h"
 #include "util.h"
 #include "emulate.h"
 #include "logic.h"
@@ -12,7 +12,7 @@
 #include "special.h"
 #include "stack.h"
 
-void emulate(emulatedCPU *cpu);
+int emulate(emulatedCPU *cpu);
 
 
 #endif

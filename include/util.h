@@ -15,6 +15,6 @@ uint16_t get_bc(emulatedCPU *cpu);
 
 uint16_t get_de(emulatedCPU *cpu);
 
-
+void readFile(emulatedCPU* cpu,char *filePath,uint16_t offset);
 
 #endif

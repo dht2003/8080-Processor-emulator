@@ -14,6 +14,20 @@ int parity(int value) {
     return count % 2 == 0;
 }
 
+void readFile(emulatedCPU* cpu,char *filePath,uint16_t offset) {
+    FILE *binary = fopen(filePath,"rb");
+    if (binary == NULL) {
+        printf("ERROR: can't open %s\n",filePath);
+        exit(1);
+    }
+    fseek(binary,0,SEEK_END);
+    uint16_t binarySize = ftell(binary);
+    fseek(binary,0,SEEK_SET);
+    uint8_t *memRead = &cpu->memory[offset];
+    fread(memRead,binarySize,1,binary);
+    free(binary);
+    
+}
 
 uint16_t get_hl(emulatedCPU *cpu) {
     return pair(cpu->H,cpu->L);
@@ -35,4 +49,5 @@ void updateAllFlags(flags* CPUflags , uint16_t value) {
     CPUflags->cy = (value > MAX_BYTE_VALUE_MASK);
     CPUflags->ac = 0; //TODO 
 }
+
 

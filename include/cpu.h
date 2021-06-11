@@ -44,6 +44,5 @@ void unimplemented();
 
 void printState(emulatedCPU *cpu);
 
-void readFile(emulatedCPU* cpu,char *filePath,uint32_t offset);
 
 #endif

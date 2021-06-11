@@ -10,7 +10,11 @@ emulatedCPU* initCPU() {
     return cpu;
 }
 
-void freeCPU(emulatedCPU *cpu) { free(cpu->memory);}
+void freeCPU(emulatedCPU *cpu) { 
+    free(cpu->memory); 
+    free(cpu->cpuFlags);
+    free(cpu);
+    }
 
 void unimplemented() {
     printf("ERROR : unimplemented instruction\n");
