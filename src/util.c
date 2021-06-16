@@ -25,7 +25,7 @@ void readFile(emulatedCPU* cpu,char *filePath,uint16_t offset) {
     fseek(binary,0,SEEK_SET);
     uint8_t *memRead = &cpu->memory[offset];
     fread(memRead,binarySize,1,binary);
-    free(binary);
+    fclose(binary);
     
 }
 

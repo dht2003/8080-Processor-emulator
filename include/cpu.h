@@ -11,6 +11,8 @@
 #define MAX_BYTE_VALUE_MASK 0xff
 #define MSB_MASK 0x80
 #define MEMORY_SIZE 16000
+#define STACK_START 0xf000
+#define SPACE_INVADERS_ROM_SIZE 0x2400
 
 
 typedef struct Flags {
