@@ -21,7 +21,16 @@ int main(int argc , char *argv[]) {
     cpu->memory[0x59d] = 0xc2;    
     cpu->memory[0x59e] = 0x05;  
     while(cpu->PC <= 0x0fff) {
-        printf("d\n");
+        if (cpu->PC == 0x689) {
+            printState(cpu);
+            printf("failed\n");
+            exit(1);
+        };
+        if (cpu->PC == 0x69b) {
+            printf("good\n");
+            exit(0);
+        }
+        printf("%04x\n",cpu->PC);
         emulate(cpu);
         //printState(cpu);
     }

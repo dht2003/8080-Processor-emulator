@@ -21,6 +21,7 @@ void xor(emulatedCPU *cpu,uint8_t value) {
 void cmp(emulatedCPU *cpu, uint8_t value) {
     uint8_t dif = cpu->A - value;
     updateAllFlags(cpu->cpuFlags , dif);
+    cpu->cpuFlags->cy = cpu->A < value;
 }
 
 void cma(emulatedCPU *cpu) {

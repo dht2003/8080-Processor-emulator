@@ -45,9 +45,9 @@ uint16_t get_de(emulatedCPU *cpu) {
 void updateAllFlags(flags* CPUflags , uint16_t value) {
     CPUflags->z = ((value & MAX_BYTE_VALUE_MASK) == 0);
     CPUflags->s = ((value & MSB_MASK) != 0);
-    CPUflags->p = parity(value & MAX_BYTE_VALUE_MASK); //TODO
-    CPUflags->cy = (value > MAX_BYTE_VALUE_MASK);
+    CPUflags->p = parity(value & MAX_BYTE_VALUE_MASK); 
     CPUflags->ac = 0; //TODO 
+    CPUflags->cy = (value  > MAX_BYTE_VALUE_MASK);
 }
 
 

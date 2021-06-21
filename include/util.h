@@ -3,6 +3,11 @@
 
 #include "cpu.h"
 
+typedef enum updateFlagsModes {
+    ADDITION,
+    SUBTRUCTION
+}updateAllFlagsModes;
+
 void updateAllFlags(flags *CPUflags , uint16_t value);
 
 int parity(int value);

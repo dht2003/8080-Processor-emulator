@@ -289,11 +289,11 @@ int emulate(emulatedCPU *cpu) {
         case rz: if(cpu->cpuFlags->z) ret(cpu); else cpu->PC += 2;break;
         case ret_op: ret(cpu);break;
         case jz: if(cpu->cpuFlags->z) jump(cpu,opcode[2],opcode[1]);else cpu->PC+=2;break;
-        case cz:if(cpu->cpuFlags->z) call(cpu,pair(opcode[2],opcode[1])); else cpu->PC+=2;break;
+        case cz: printState(cpu);if(cpu->cpuFlags->z) call(cpu,pair(opcode[2],opcode[1])); else cpu->PC+=2;break;
         case call_op: call(cpu,pair(opcode[2],opcode[1]));break;
-        case aci: add(cpu,opcode[1]);cpu->PC++;break;
+        case aci: adc(cpu,opcode[1]);cpu->PC++;break;
         case rst_1: unimplemented();break;
-        case rnc: if(!cpu->cpuFlags->cy); ret(cpu); break;
+        case rnc: if(!cpu->cpuFlags->cy) ret(cpu); break;
         case pop_d: {
             uint16_t de = pop(cpu);
             cpu->D = (de >> 8) & MAX_BYTE_VALUE_MASK;
@@ -311,7 +311,7 @@ int emulate(emulatedCPU *cpu) {
         case cc: if(cpu->cpuFlags->cy) call(cpu,pair(opcode[2],opcode[1]));else cpu->PC+=2;break;
         case sbi: sbb(cpu,opcode[1]); cpu->PC++;break;
         case rst_3: unimplemented(); break;
-        case rpo: if(!cpu->cpuFlags->p); ret(cpu); break; 
+        case rpo: if(!cpu->cpuFlags->p)ret(cpu); break; 
         case pop_h: {
             uint16_t hl = pop(cpu);
             cpu->H = (hl >> 8) & MAX_BYTE_VALUE_MASK;
@@ -319,7 +319,7 @@ int emulate(emulatedCPU *cpu) {
         } break;
         case jpo: if(!cpu->cpuFlags->p) jump(cpu,opcode[2],opcode[1]);else cpu->PC+=2;break;
         case xthl_op: xthl(cpu); break;
-        case cpo: if(!cpu->cpuFlags->p) call(cpu,pair(opcode[2],opcode[1]));else cpu->PC+=2;break;
+        case cpo: printf("CPO\n");if(!cpu->cpuFlags->p) call(cpu,pair(opcode[2],opcode[1]));else cpu->PC+=2;break;
         case push_h: push(cpu,cpu->H,cpu->L); break;
         case ani: and(cpu,opcode[1]);cpu->PC++;break;
         case rst_4: unimplemented(); break;
@@ -338,7 +338,7 @@ int emulate(emulatedCPU *cpu) {
         case cpe: if(cpu->cpuFlags->p) call(cpu,pair(opcode[2],opcode[1]));else cpu->PC+=2;break;
         case xri: xor(cpu,opcode[1]);cpu->PC++;break;
         case rst_5: unimplemented(); break;
-        case rp_op: if(cpu->cpuFlags->p) ret(cpu);break;
+        case rp_op: if(!cpu->cpuFlags->s) ret(cpu);break;
         case pop_psw: {
             uint16_t value = pop(cpu);
             cpu->A = (value >> 8) & MAX_BYTE_VALUE_MASK;
@@ -349,9 +349,9 @@ int emulate(emulatedCPU *cpu) {
             cpu->cpuFlags->z = psw  >> 6;
             cpu->cpuFlags->s = psw  >> 7;
         } break; 
-        case jp: if(cpu->cpuFlags->p) jump(cpu,opcode[2],opcode[1]);else cpu->PC+=2;break;
+        case jp: if(!cpu->cpuFlags->s) jump(cpu,opcode[2],opcode[1]);else cpu->PC+=2;break;
         case di_op: di(cpu); break;
-        case cp: if(cpu->cpuFlags->p) call(cpu,pair(opcode[2],opcode[1]));else cpu->PC+=2;break;
+        case cp: if(!cpu->cpuFlags->s) call(cpu,pair(opcode[2],opcode[1]));else cpu->PC+=2;break;
         case push_psw: {
             uint8_t psw = (cpu->cpuFlags->cy |
                             (cpu->cpuFlags->p << 2)|
