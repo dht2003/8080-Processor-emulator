@@ -286,10 +286,10 @@ int emulate(emulatedCPU *cpu) {
         case push_b: push(cpu,cpu->B,cpu->C); break;
         case adi: add(cpu,opcode[1]); cpu->PC++; break;
         case rst_0: unimplemented(); break;
-        case rz: if(cpu->cpuFlags->z) ret(cpu); else cpu->PC += 2;break;
+        case rz: if(cpu->cpuFlags->z) ret(cpu);break;
         case ret_op: ret(cpu);break;
         case jz: if(cpu->cpuFlags->z) jump(cpu,opcode[2],opcode[1]);else cpu->PC+=2;break;
-        case cz: printState(cpu);if(cpu->cpuFlags->z) call(cpu,pair(opcode[2],opcode[1])); else cpu->PC+=2;break;
+        case cz: if(cpu->cpuFlags->z) call(cpu,pair(opcode[2],opcode[1])); else cpu->PC+=2;break;
         case call_op: call(cpu,pair(opcode[2],opcode[1]));break;
         case aci: adc(cpu,opcode[1]);cpu->PC++;break;
         case rst_1: unimplemented();break;
@@ -319,7 +319,7 @@ int emulate(emulatedCPU *cpu) {
         } break;
         case jpo: if(!cpu->cpuFlags->p) jump(cpu,opcode[2],opcode[1]);else cpu->PC+=2;break;
         case xthl_op: xthl(cpu); break;
-        case cpo: printf("CPO\n");if(!cpu->cpuFlags->p) call(cpu,pair(opcode[2],opcode[1]));else cpu->PC+=2;break;
+        case cpo: if(!cpu->cpuFlags->p) call(cpu,pair(opcode[2],opcode[1]));else cpu->PC+=2;break;
         case push_h: push(cpu,cpu->H,cpu->L); break;
         case ani: and(cpu,opcode[1]);cpu->PC++;break;
         case rst_4: unimplemented(); break;

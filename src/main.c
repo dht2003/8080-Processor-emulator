@@ -30,6 +30,8 @@ int main(int argc , char *argv[]) {
             printf("good\n");
             exit(0);
         }
+        if (cpu->PC==0x372) printState(cpu);
+        if (cpu->PC==0x370) printState(cpu);
         printf("%04x\n",cpu->PC);
         emulate(cpu);
         //printState(cpu);
