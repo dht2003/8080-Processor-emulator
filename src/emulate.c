@@ -213,7 +213,7 @@ int emulate(emulatedCPU *cpu) {
         case add_c: add(cpu,cpu->C); break;
         case add_d: add(cpu,cpu->D); break;
         case add_e: add(cpu,cpu->E); break;
-        case add_h: add(cpu, cpu->H); break;
+        case add_h: add(cpu,cpu->H); break;
         case add_l: add(cpu,cpu->L); break;
         case add_m: add(cpu,cpu->memory[get_hl(cpu)]);break;
         case add_a: add(cpu,cpu->A); break;
@@ -282,7 +282,7 @@ int emulate(emulatedCPU *cpu) {
         break;
         case jnz: if(!cpu->cpuFlags->z) jump(cpu,opcode[2],opcode[1]);else cpu->PC += 2; break;
         case jmp: jump(cpu,opcode[2],opcode[1]);break;
-        case cnz: if(!cpu->cpuFlags->z) call(cpu,pair(opcode[2],opcode[1])); else cpu->PC+=2; break;
+        case cnz: if(cpu->cpuFlags->z == 0) call(cpu,pair(opcode[2],opcode[1])); else cpu->PC+=2; break;
         case push_b: push(cpu,cpu->B,cpu->C); break;
         case adi: add(cpu,opcode[1]); cpu->PC++; break;
         case rst_0: unimplemented(); break;

@@ -11,6 +11,11 @@ int main(int argc , char *argv[]) {
     cpu->memory[1]=0;    
     cpu->memory[2]=0x01;    
 
+    uint8_t test1 = 0x34;
+    uint8_t test2 = 0x35;
+    uint8_t test3 = test1 - test2;
+    printf("test: %02x\n",test3);
+
     //Fix the stack pointer from 0x6ad to 0x7ad    
     // this 0x06 byte 112 in the code, which is    
     // byte 112 + 0x100 = 368 in memory    
@@ -24,15 +29,13 @@ int main(int argc , char *argv[]) {
         if (cpu->PC == 0x689) {
             printState(cpu);
             printf("failed\n");
-            exit(1);
+            break;
         };
         if (cpu->PC == 0x69b) {
             printf("good\n");
-            exit(0);
+            break;
         }
-        if (cpu->PC==0x372) printState(cpu);
-        if (cpu->PC==0x370) printState(cpu);
-        printf("%04x\n",cpu->PC);
+        printf("PC: %04x, instruction: %02x\n",cpu->PC,cpu->memory[cpu->PC]);
         emulate(cpu);
         //printState(cpu);
     }
