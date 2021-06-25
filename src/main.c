@@ -25,14 +25,14 @@ int main(int argc , char *argv[]) {
     cpu->memory[0x59c] = 0xc3; //JMP    
     cpu->memory[0x59d] = 0xc2;    
     cpu->memory[0x59e] = 0x05;  
-    while(cpu->PC <= 0x0fff) {
+    while(1) {
         if (cpu->PC == 0x689) {
             printState(cpu);
             printf("failed\n");
             break;
         };
         if (cpu->PC == 0x69b) {
-            printf("good\n");
+            printf("CPU IS OPERATIONAL\n");
             break;
         }
         printf("PC: %04x, instruction: %02x\n",cpu->PC,cpu->memory[cpu->PC]);

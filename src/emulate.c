@@ -20,7 +20,7 @@ int emulate(emulatedCPU *cpu) {
         case dcr_b: dcr(cpu->cpuFlags,&cpu->B); break;
         case mvi_b: mov(&cpu->B,opcode[1]); cpu->PC++; break;
         case rlc_op: {
-            cpu->cpuFlags->cy = (cpu->A & MSB_MASK) & 0x01;
+            cpu->cpuFlags->cy = (cpu->A & MSB_MASK) >> 7;
             cpu->A = (cpu->A << 1) | (cpu->A >> 7);
         } break;
         case dad_b_c: {
@@ -35,7 +35,7 @@ int emulate(emulatedCPU *cpu) {
         case dcx_b_c: dcx(&cpu->B,&cpu->C); break;
         case inr_c: inr(cpu->cpuFlags,&cpu->C); break;
         case dcr_c: dcr(cpu->cpuFlags,&cpu->C); break;
-        case mvi_c: mov(&cpu->C,opcode[1]); cpu->PC+=2; break;
+        case mvi_c: mov(&cpu->C,opcode[1]); cpu->PC++; break;
         case rrc_op: rrc(cpu); break;
         case lxi_d_e: {
             uint16_t value = pair(opcode[2],opcode[1]);
@@ -71,7 +71,7 @@ int emulate(emulatedCPU *cpu) {
         case lxi_h_l: {
             uint16_t hl = pair(opcode[2],opcode[1]); 
             lxi(&cpu->H,&cpu->L,hl); 
-            cpu->PC++;
+            cpu->PC += 2;
         } break;
         case shld: 
         {
@@ -94,6 +94,7 @@ int emulate(emulatedCPU *cpu) {
             uint16_t addr = pair(opcode[2],opcode[1]);
             cpu->L = cpu->memory[addr]; 
             cpu->H = cpu->memory[addr + 1];
+            cpu->PC += 2;
         }break;
         case dcx_h_l: dcx(&cpu->H,&cpu->L); break;
         case inr_l: inr(cpu->cpuFlags,&cpu->L); break;
@@ -124,8 +125,8 @@ int emulate(emulatedCPU *cpu) {
         } break;
         case mvi_m: {
             uint16_t hl = pair(cpu->H,cpu->L);
-            uint8_t m = cpu->memory[hl];
-            mov(&m,opcode[1]);
+            uint8_t * m = &cpu->memory[hl];
+            mov(m,opcode[1]);
             cpu->PC++;
         } break;
         case stc_op: stc(cpu); break;
