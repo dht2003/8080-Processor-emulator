@@ -6,6 +6,7 @@
 
 #include "cpu.h"
 #include "util.h"
+#include "mem.h"
 
 void push(emulatedCPU *cpu,uint8_t highRegister, uint8_t lowerRegister );
 

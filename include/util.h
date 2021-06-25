@@ -2,6 +2,7 @@
 #define UTIL_H
 
 #include "cpu.h"
+#include "mem.h"
 
 void updateAllFlags(flags *CPUflags , uint16_t value);
 

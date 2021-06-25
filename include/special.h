@@ -6,6 +6,7 @@
 
 #include "cpu.h"
 #include "util.h"
+#include "mem.h"
 
 void ei(emulatedCPU *cpu); 
 

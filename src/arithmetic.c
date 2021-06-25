@@ -14,7 +14,7 @@ void adc(emulatedCPU *cpu, uint8_t value) {
 }
 
 void dad(emulatedCPU *cpu , uint16_t value) {
-    uint16_t hl = (cpu->H << 8) | cpu->L;
+    uint16_t hl = get_hl(cpu);
     uint16_t result = hl + value;
     cpu->cpuFlags->cy = (result > MAX_BYTE_VALUE_MASK);
     cpu->H = (result >> 8) & MAX_BYTE_VALUE_MASK;
@@ -40,10 +40,10 @@ void inr(flags *CPUflags , uint8_t *reg) {
 }
 
 void inx(uint8_t *upperRegister , uint8_t *lowerRegister) {
-    uint16_t pair = ((*upperRegister) << 8) | (*lowerRegister);
-    pair++;
-    *lowerRegister = (pair & MAX_BYTE_VALUE_MASK);
-    *upperRegister = pair >> 8;
+    uint16_t value = pair(*upperRegister,*lowerRegister);
+    value++;
+    *lowerRegister = (value & MAX_BYTE_VALUE_MASK);
+    *upperRegister = value >> 8;
 }
 
 void dcr(flags *CPUflags, uint8_t *reg) {
@@ -55,8 +55,8 @@ void dcr(flags *CPUflags, uint8_t *reg) {
 }
 
 void dcx(uint8_t *upperRegister, uint8_t *lowerRegister) {
-   uint16_t pair = ((*upperRegister) << 8) | (*lowerRegister);
-    pair--;
-    *lowerRegister = (pair & MAX_BYTE_VALUE_MASK);
-    *upperRegister = pair >> 8; 
+   uint16_t value = pair(*upperRegister,*lowerRegister);
+    value--;
+    *lowerRegister = (value & MAX_BYTE_VALUE_MASK);
+    *upperRegister = value >> 8; 
 }

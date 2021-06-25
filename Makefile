@@ -11,8 +11,9 @@ DEPS := $(OBJS:.o=.d)
 INC_DIRS := $(shell find $(INC_DIR) -type d)
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
-CPPFLAGS ?= $(INC_FLAGS) -MMD -MP
+DEBUG_FLAG := -g
 
+CPPFLAGS ?= $(INC_FLAGS) -MMD -MP  -Wall $(DEBUG_FLAG)
 $(TARGET): $(OBJS)
 	$(CC) $(LDFLAGS) $(OBJS) -o $@ $(LOADLIBES) $(LDLIBS)
 

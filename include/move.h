@@ -4,6 +4,7 @@
 
 #include "cpu.h"
 #include "util.h"
+#include "mem.h"
 
 void mov(uint8_t *reg, uint8_t value);
 

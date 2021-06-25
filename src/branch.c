@@ -4,7 +4,6 @@
 
 void jump(emulatedCPU *cpu, uint8_t upper_adr, uint8_t lower_adr) {
     uint16_t adr =  pair(upper_adr,lower_adr);
-    if (adr == 0) exit(1);
     cpu->PC = adr;
 }
 

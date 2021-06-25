@@ -7,6 +7,6 @@ void lxi(uint8_t *high_reg,uint8_t *low_reg,uint16_t value) {
     mov(low_reg,value & MAX_BYTE_VALUE_MASK);
 }
 
-void ldax(emulatedCPU *cpu,uint16_t addr) { cpu->A = cpu->memory[addr];}
+void ldax(emulatedCPU *cpu,uint16_t addr) { cpu->A = readByte(cpu,addr);}
 
-void stax(emulatedCPU *cpu,uint16_t addr) { cpu->memory[addr]=cpu->A;}
+void stax(emulatedCPU *cpu,uint16_t addr) {writeByte(cpu,addr,cpu->A);}

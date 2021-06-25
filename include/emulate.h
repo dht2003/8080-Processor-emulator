@@ -11,6 +11,7 @@
 #include "opcodes.h"
 #include "special.h"
 #include "stack.h"
+#include "mem.h"
 
 int emulate(emulatedCPU *cpu);
 
