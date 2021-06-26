@@ -37,11 +37,13 @@ uint8_t readNextByte(emulatedCPU *cpu) {
     return readByte(cpu,cpu->PC++);
 }
 
+
 uint16_t readNextWord(emulatedCPU *cpu) {
     uint8_t lowAddr = readNextByte(cpu);
     uint8_t highAddr = readNextByte(cpu);
     return pair(highAddr,lowAddr);
 }
+
 
 void invalidMemoryAccess() {
     printf("Invalid memory access\n");
