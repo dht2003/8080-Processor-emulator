@@ -1,24 +1,42 @@
 CC = gcc
-BIN_DIR ?= ./bin
+BUILD_DIR = ./build
+BIN_DIR ?= $(BUILD_DIR)/bin
+OBJ_DIR ?= $(BUILD_DIR)/obj
 TARGET ?= $(BIN_DIR)/emulate.out
 SRC_DIRS ?= ./src
 INC_DIR ?= ./include
 
 SRCS := $(shell find $(SRC_DIRS) -name  *.c)
-OBJS := $(addsuffix .o,$(basename $(SRCS)))
-DEPS := $(OBJS:.o=.d)
-
-INC_DIRS := $(shell find $(INC_DIR) -type d)
-INC_FLAGS := $(addprefix -I,$(INC_DIRS))
+OBJS := $(SRCS:$(SRC_DIRS)/%.c=$(OBJ_DIR)/%.o)
 
 DEBUG_FLAG := -g
+CFLAGS ?= $(INC_FLAGS) -I$(INC_DIR) -Wall $(DEBUG_FLAG)
 
-CPPFLAGS ?= $(INC_FLAGS) -MMD -MP  -Wall $(DEBUG_FLAG)
-$(TARGET): $(OBJS)
-	$(CC) $(LDFLAGS) $(OBJS) -o $@ $(LOADLIBES) $(LDLIBS)
+COLOUR_GREEN=\033[0;32m
+COLOUR_RED=\033[0;31m
+COLOUR_END=\033[0m
+
+.PHONY: all
+all : $(TARGET)
+
+$(OBJ_DIR)/%.o : $(SRC_DIRS)/%.c
+	@echo -e "$(COLOUR_GREEN)[X] Compiling c files : $< -> $@$(COLOUR_END)"
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+$(TARGET) : $(OBJS)
+	@echo -e "$(COLOUR_GREEN)[X] linking files$(COLOUR_END)"
+	$(CC) -o $@ $^ $(CFLAGS) 
 
 .PHONY: clean
 clean:
-	$(RM) $(TARGET) $(OBJS) $(DEPS)
+	@echo -e "$(COLOUR_RED)[X] Deleting executable $(TARGET)$(COLOUR_END)"
+	@$(RM) $(TARGET)
+	@echo -e "$(COLOUR_RED)[X] Deleting c object files$(COLOUR_END)"
+	@$(RM) $(OBJS)
 
--include $(DEPS)
+.PHONY: dirs
+dirs: 
+	@echo "$(COLOUR_GREEN)[X] Creating directories$(COLOUR_END)"
+	@mkdir -p $(BUILD_DIR)
+	@mkdir -p $(BIN_DIR)
+	@mkdir -p $(OBJ_DIR)

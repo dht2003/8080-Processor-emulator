@@ -1,5 +1,5 @@
 // File: logic.c 
-// Description : imlementation of logic operations
+// Description : implementaiton of logic operations
 
 #include "logic.h"
 

@@ -1,14 +1,14 @@
 //File : special.c
-// Description: imlementation of special and i\o operations
+// Description: implementation of special and i\o operations
 
 #include "special.h"
 
 void ei(emulatedCPU *cpu) {
-    cpu->enable_intrupts = 1;
+    cpu->enable_interrupts = 1;
 }
 
 void di(emulatedCPU *cpu) {
-    cpu->enable_intrupts = 0;
+    cpu->enable_interrupts = 0;
 }
 
 void halt() {

@@ -33,7 +33,7 @@ typedef struct EMULATED_CPU {
    uint8_t L;
    uint16_t SP;
    uint16_t PC;
-   uint8_t enable_intrupts : 1;
+   uint8_t enable_interrupts : 1;
    flags *cpuFlags;
    uint8_t *memory;
 } emulatedCPU;

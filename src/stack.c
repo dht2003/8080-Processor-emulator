@@ -1,5 +1,5 @@
 // File : stack.c
-// Description : imlementation of general stack functions 
+// Description : implementation of general stack functions 
 
 #include "stack.h"
 
