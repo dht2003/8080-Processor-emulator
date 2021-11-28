@@ -5,30 +5,30 @@
 
 void add(emulatedCPU *cpu , uint8_t value) {
     uint16_t result = (uint16_t) cpu->A + (uint16_t) value;
-    updateAllFlags(cpu->cpuFlags,result);
+    updateAllFlags(&cpu->cpuFlags,result);
     cpu->A = result & MAX_BYTE_VALUE_MASK;
 }
 
 void adc(emulatedCPU *cpu, uint8_t value) {
-    add(cpu,value + cpu->cpuFlags->cy);
+    add(cpu,value + cpu->cpuFlags.cy);
 }
 
 void dad(emulatedCPU *cpu , uint16_t value) {
     uint16_t hl = get_hl(cpu);
     uint16_t result = hl + value;
-    cpu->cpuFlags->cy = (result > MAX_BYTE_VALUE_MASK);
+    cpu->cpuFlags.cy = (result > MAX_BYTE_VALUE_MASK);
     cpu->H = (result >> 8) & MAX_BYTE_VALUE_MASK;
     cpu->L = result & MAX_BYTE_VALUE_MASK;
 }
 
 void sub(emulatedCPU *cpu, uint8_t value) {
     uint16_t result = (uint16_t) cpu->A - value;
-    updateAllFlags(cpu->cpuFlags,result);
+    updateAllFlags(&cpu->cpuFlags,result);
     cpu->A = result & MAX_BYTE_VALUE_MASK;
 }
 
 void sbb(emulatedCPU *cpu,uint8_t value) {
-    sub(cpu,value+cpu->cpuFlags->cy);
+    sub(cpu,value+cpu->cpuFlags.cy);
 }
 
 void inr(flags *CPUflags , uint8_t *reg) {

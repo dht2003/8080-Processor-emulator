@@ -10,9 +10,10 @@
 
 #define MAX_BYTE_VALUE_MASK 0xff
 #define MSB_MASK 0x80
-#define MEMORY_SIZE 16000
-#define STACK_START 0xf000
+#define MEMORY_SIZE 0x10000
 #define SPACE_INVADERS_ROM_SIZE 0x2400
+
+
 
 
 typedef struct Flags {
@@ -34,17 +35,14 @@ typedef struct EMULATED_CPU {
    uint16_t SP;
    uint16_t PC;
    uint8_t enable_interrupts : 1;
-   flags *cpuFlags;
-   uint8_t *memory;
+   flags cpuFlags;
+   uint8_t memory[MEMORY_SIZE];
 } emulatedCPU;
 
-emulatedCPU *initCPU();
-
-void freeCPU(emulatedCPU *cpu) ;
 
 void unimplemented();
 
-void printState(emulatedCPU *cpu);
+void printState(emulatedCPU cpu);
 
 
 #endif

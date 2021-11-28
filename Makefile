@@ -36,7 +36,7 @@ clean:
 
 .PHONY: dirs
 dirs: 
-	@echo "$(COLOUR_GREEN)[X] Creating directories$(COLOUR_END)"
+	@echo -e "$(COLOUR_GREEN)[X] Creating directories$(COLOUR_END)"
 	@mkdir -p $(BUILD_DIR)
 	@mkdir -p $(BIN_DIR)
 	@mkdir -p $(OBJ_DIR)

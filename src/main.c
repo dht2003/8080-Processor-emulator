@@ -2,7 +2,7 @@
 #include "test.h"
 
 int main(int argc , char *argv[]) {
-    emulatedCPU cpu = initCPU();
+    emulatedCPU cpu;
     testCPU(&cpu);
-    freeCPU(&cpu);
+    printState(cpu);
 }

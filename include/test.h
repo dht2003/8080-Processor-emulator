@@ -6,7 +6,7 @@
 #include "emulate.h"
 #include "util.h"
 
-void testCPU(emulatedCPU cpu);
+void testCPU(emulatedCPU *cpu);
 
 
 #endif
