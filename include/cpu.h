@@ -11,7 +11,6 @@
 #define MAX_BYTE_VALUE_MASK 0xff
 #define MSB_MASK 0x80
 #define MEMORY_SIZE 0x10000
-#define SPACE_INVADERS_ROM_SIZE 0x2400
 
 
 
@@ -37,6 +36,7 @@ typedef struct EMULATED_CPU {
    uint8_t enable_interrupts : 1;
    flags cpuFlags;
    uint8_t memory[MEMORY_SIZE];
+   uint64_t cyc;
 } emulatedCPU;
 
 

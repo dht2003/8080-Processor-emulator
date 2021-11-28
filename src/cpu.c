@@ -4,7 +4,6 @@
 #include "cpu.h"
 
 
-
 void unimplemented() {
     printf("ERROR : unimplemented instruction\n");
     exit(1);
@@ -12,9 +11,9 @@ void unimplemented() {
 
 void printState(emulatedCPU cpu) {
     printf("Flags:\nS:%d\nZ:%d\nP:%d\nCY:%d\nAC:%d\n",cpu.cpuFlags.s,cpu.cpuFlags.z,cpu.cpuFlags.p,cpu.cpuFlags.cy,cpu.cpuFlags.ac);
-    printf("Registers:\nA: $%02x \nB: $%02x \nC: $%02x \nD: $%02x \nE: $%02x \nH: $%02x \nL: $%02x \nSP: %04x\nPC: %04x\n",    
+    printf("Registers:\nA: $%02x \nB: $%02x \nC: $%02x \nD: $%02x \nE: $%02x \nH: $%02x \nL: $%02x \nSP: %04x\nPC: %04x\nCycles:%lu\n",    
            cpu.A, cpu.B, cpu.C, cpu.D,    
-           cpu.E, cpu.H, cpu.L, cpu.SP,cpu.PC);   
+           cpu.E, cpu.H, cpu.L, cpu.SP,cpu.PC,cpu.cyc);   
 }
 
 

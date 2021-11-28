@@ -28,5 +28,4 @@ void nop() {
 }
 
 void daa() {
-    
 }

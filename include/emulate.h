@@ -12,6 +12,7 @@
 #include "special.h"
 #include "stack.h"
 #include "mem.h"
+#include "interrupt.h"
 
 int emulate(emulatedCPU *cpu);
 
