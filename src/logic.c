@@ -5,23 +5,23 @@
 
 void and(emulatedCPU *cpu, uint8_t value) {
     cpu->A &= value;
-    updateAllFlags(cpu->cpuFlags, cpu->A);
+    updateAllFlags(&cpu->cpuFlags, cpu->A);
 }
 
 void or(emulatedCPU *cpu, uint8_t value) {
     cpu->A |= value;
-    updateAllFlags(cpu->cpuFlags, cpu->A);
+    updateAllFlags(&cpu->cpuFlags, cpu->A);
 }
 
 void xor(emulatedCPU *cpu,uint8_t value) {
     cpu->A ^= value;
-    updateAllFlags(cpu->cpuFlags,cpu->A);
+    updateAllFlags(&cpu->cpuFlags,cpu->A);
 }
 
 void cmp(emulatedCPU *cpu, uint8_t value) {
     uint8_t dif = cpu->A - value;
-    updateAllFlags(cpu->cpuFlags , dif);
-    cpu->cpuFlags->cy = cpu->A < value;
+    updateAllFlags(&cpu->cpuFlags , dif);
+    cpu->cpuFlags.cy = cpu->A < value;
 }
 
 void cma(emulatedCPU *cpu) {
@@ -29,11 +29,11 @@ void cma(emulatedCPU *cpu) {
 }
 
 void cmc(emulatedCPU *cpu) {
-    cpu->cpuFlags->cy = ~(cpu->cpuFlags->cy);
+    cpu->cpuFlags.cy = ~(cpu->cpuFlags.cy);
 }
 
 void stc(emulatedCPU *cpu) {
-    cpu->cpuFlags->cy = 1;
+    cpu->cpuFlags.cy = 1;
 }
 
 void rrc(emulatedCPU *cpu) {
